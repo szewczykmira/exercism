@@ -22,6 +22,13 @@ class Luhn:
         check_value = self.checksum() % 10
         return check_value == 0
 
+    def __str__(self):
+        return ''.join(map(str, self.array))
+
     @classmethod
     def create(cls, number):
-        return number
+        str_number = str(Luhn(number))
+        for i in range(0, 10):
+            value = int(str_number + str(i))
+            if cls(value).is_valid():
+                return value
