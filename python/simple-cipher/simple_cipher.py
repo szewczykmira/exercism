@@ -32,19 +32,14 @@ class Cipher:
             return LETTERS[index % 26]
         return ''
 
-    def _encode_letter(self, num, letter):
-        return self._code(num, letter)
+    def code(self, phrase, mul=1):
+        return ''.join(self._code(num, l, mul) for num, l in enumerate(phrase))
 
     def encode(self, phrase):
-        return ''.join(self._encode_letter(num, l) 
-                for num, l in enumerate(phrase))
-
-    def _decode_letter(self, num, letter):
-        return self._code(num, letter, mul=-1)
+        return self.code(phrase)
 
     def decode(self, phrase):
-        return ''.join(self._decode_letter(num, l) 
-                for num, l in enumerate(phrase))
+        return self.code(phrase, mul=-1)
 
     def generate_key(self):
         return ''.join([choice(LETTERS) for _ in range(0, 100)])
