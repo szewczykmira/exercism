@@ -4,25 +4,16 @@ from string import ascii_lowercase
 LETTERS = ascii_lowercase
 
 class Caesar:
-    CODE = 3
+    CODE = 'd'
+    
+    def __init__(self):
+        self.cipher = Cipher(self.CODE)
 
     def encode(self, phrase):
-        return ''.join([self._encode_letter(letter) for letter in phrase])
+        return self.cipher.encode(phrase)
 
     def decode(self, phrase):
-        return ''.join([self._decode_letter(letter) for letter in phrase])
-
-    def _encode_letter(self, letter):
-        if letter.isalpha():
-            index = LETTERS.index(letter.lower()) + self.CODE
-            return LETTERS[index % 26]
-        return ''
-
-    def _decode_letter(self, letter):
-        if letter.isalpha():
-            index = LETTERS.index(letter.lower()) - self.CODE
-            return LETTERS[index % 26]
-        return ''
+        return self.cipher.decode(phrase)
 
 
 class Cipher:
@@ -34,21 +25,22 @@ class Cipher:
             raise ValueError
         self.mapped_key = [LETTERS.index(x) for x in self.key]
 
-    def _encode_letter(self, num, letter):
+    def _code(self, num, letter, mul=1):
         if letter.isalpha():
-            index = LETTERS.index(letter.lower()) + self.key_value(num)
+            lower_letter = letter.lower()
+            index = LETTERS.index(lower_letter) + mul * self.key_value(num)
             return LETTERS[index % 26]
         return ''
+
+    def _encode_letter(self, num, letter):
+        return self._code(num, letter)
 
     def encode(self, phrase):
         return ''.join(self._encode_letter(num, l) 
                 for num, l in enumerate(phrase))
 
     def _decode_letter(self, num, letter):
-        if letter.isalpha():
-            index = LETTERS.index(letter.lower()) - self.key_value(num)
-            return LETTERS[index % 26]
-        return ''
+        return self._code(num, letter, mul=-1)
 
     def decode(self, phrase):
         return ''.join(self._decode_letter(num, l) 
