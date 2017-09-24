@@ -28,23 +28,23 @@ class WordyTest(unittest.TestCase):
     def test_add_more_digits(self):
         self.assertEqual(calculate("What is 123 plus 45678?"), 45801)
 
-    def add_twice(self):
+    def test_add_twice(self):
         self.assertEqual(calculate("What is 1 plus 2 plus 1?"), 4)
 
-    def add_then_subtract(self):
+    def test_add_then_subtract(self):
         self.assertEqual(calculate("What is 1 plus 5 minus -8?"), 14)
 
-    def subtract_twice(self):
+    def test_subtract_twice(self):
         self.assertEqual(calculate("What is 20 minus 14 minus 13?"), -7)
 
-    def multiply_twice(self):
+    def test_multiply_twice(self):
         self.assertEqual(
             calculate("What is 2 multiplied by -2 multiplied by 3?"), -12)
 
-    def add_then_multiply(self):
+    def test_add_then_multiply(self):
         self.assertEqual(calculate("What is -3 plus 7 multiplied by -2?"), -8)
 
-    def divide_twice(self):
+    def test_divide_twice(self):
         self.assertEqual(
             calculate("What is -12000 divided by 25 divided by -30?"), 16)
 
