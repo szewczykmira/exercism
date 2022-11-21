@@ -1,9 +1,7 @@
-def on_square(square):
-    return 2 ** (square-1)
+def square(sq):
+    if sq > 0 and sq < 65:
+        return 2 ** (sq-1)
+    raise ValueError("Mesage")
 
-def total_after(square):
-    result = 0
-    for i in range(0, square):
-        result = (result * 2) + 1
-    return result
-    
+def total():
+    return sum([square(n) for n in range(1, 65)])
